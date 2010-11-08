@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kick Ass Starfield</title>
+	<script type="text/javascript" src="js/Char.js"></script>
+	<script type="text/javascript" src="js/Engine.js"></script>
+
+	<style stype="text/css">
+	body {
+		font-family: arial;
+		font-size: 14px;
+		color: #444;
+		overflow: hidden;
+	}
+	a { color: #aa0000; }
+	.char {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		background: #444;
+	}
+	</style>
+</head>
+<body>
+	<h1>Kick Ass Starfield</h1>
+	<p>Target practise for <a href="http://erkie.github.com/">Erik Rothoff's Kick Ass</a>. Starfield by <a href="http://twitter.com/boyvanamstel">@boyvanamstel</a>. Press 'm' for more targets.</p>
+	<div id="canvas"></div>
+
+	<script type="text/javascript">
+		Engine.start();
+		
+		function addChars() {
+			for(var i = 0; i <= 10; i++) {
+
+				char = new Char();
+				char.xVelocity = Math.floor(Math.random() *10) - 5;
+				char.yVelocity = Math.floor(Math.random() *10) - 5;
+				char.x = (window.innerWidth /2) + (char.element.offsetWidth /2)
+				char.y = (window.innerHeight /2) + (char.element.offsetHeight /2)
+				Engine.addDelegate(char, char.move);	
+				Engine.addDelegate(char, char.checkAlive);	
+			}
+		} addChars();
+
+		window.focus();
+		document.onkeyup = function(e) {
+			switch(e.keyCode) {
+				case(77):
+					addChars();
+				break;
+			}
+		}
+
+		var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='http://erkie.github.com/asteroids.min.js';void(0);
+	</script>
+	
+</body>
+</html>
