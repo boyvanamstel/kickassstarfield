@@ -5,44 +5,69 @@
 var Char = function() {
 	this.id = Char.id++;
 	
-	this.element = document.createElement('div');
-	this.element.setAttribute('id', 'char'+this.id);
-	this.element.setAttribute('class', 'char');
-	this.element.style.left = '0px';
-	this.element.style.left = '0px';
-	document.getElementById('canvas').appendChild(this.element);
+	var _element = document.createElement('div');
+	_element.setAttribute('id', 'char'+this.id);
+	_element.setAttribute('class', 'char');
+	_element.style.left = '0px';
+	_element.style.left = '0px';
+	document.getElementById('canvas').appendChild(_element);
+	this.getElement = function() { return _element; }
 
-	this.x = 0;
+	var _x = 0;
 	this.setX = function(x) {
-		this.x = x || 0;
-		this.element.style.left = this.x + 'px';
+		_x = x || 0;
+		_element.style.left = _x + 'px';
 	}
-	this.y = 0;
+	this.getX = function() { return _x; }
+
+	var _y = 0;
 	this.setY = function(y) {
-		this.y = y || 0;
-		this.element.style.top = this.y + 'px';
+		_y = y || 0;
+		_element.style.top = _y + 'px';
 	}
-	this.xVelocity = 0;
-	this.yVelocity = 0;
+	this.getY = function() { return _y; }
 
-	this.move = function() {
-		this.setX(this.x + this.xVelocity + Math.floor((Math.random() * this.xVelocity) - (this.xVelocity /2)));
-		this.setY(this.y + this.yVelocity + Math.floor((Math.random() * this.yVelocity) - (this.yVelocity /2)));
+	var _xVelocity = 0;
+	this.setXVelocity = function(xVelocity) {
+		_xVelocity = xVelocity;
+	}
+	this.getXVelocity = function() { return _xVelocity; }
 
+	var _yVelocity = 0;
+	this.setYVelocity = function(yVelocity) {
+		_yVelocity = yVelocity;
+	}
+	this.getYVelocity = function() { return _yVelocity; }
+
+}; Char.id = 0;
+
+Char.prototype.constructor = Char;
+
+Char.prototype.move = function() {
+		var element = this.getElement();	
+		var x = this.getX();
+		var y = this.getY();
+		var xVelocity = this.getXVelocity();
+		var yVelocity = this.getYVelocity();
+		
+		this.setX(x + xVelocity + Math.floor((Math.random() * xVelocity) - (xVelocity /2)));
+		this.setY(y + yVelocity + Math.floor((Math.random() * yVelocity) - (yVelocity /2)));
+		
 		w = window.innerWidth || document.body.clientWidth;
 		h = window.innerHeight || document.body.clientHeight;
 
-		if(this.element.offsetLeft + this.element.offsetWidth > w) this.setX(0);
-		if(this.element.offsetLeft + this.element.offsetWidth < 0) this.setX(w - this.element.offsetWidth);
+		if(element.offsetLeft + element.offsetWidth > w) this.setX(0);
+		if(element.offsetLeft + element.offsetWidth < 0) this.setX(w - element.offsetWidth);
 
-		if(this.element.offsetTop + this.element.offsetHeight > h) this.setY(0);	
-		if(this.element.offsetTop + this.element.offsetWidth < 0) this.setY(h - this.element.offsetHeight);	
-	}
+		if(element.offsetTop + element.offsetHeight > h) this.setY(0);	
+		if(element.offsetTop + element.offsetWidth < 0) this.setY(h - element.offsetHeight);
+}
 
-	this.checkAlive = function() {
-		if(!document.getElementById(this.element.getAttribute('id'))) {
+Char.prototype.checkAlive = function() {
+		var element = this.getElement();
+
+		if(!document.getElementById(element.getAttribute('id'))) {
 			Engine.removeDelegate(this, this.move);
 			Engine.removeDelegate(this, this.checkAlive);
 		}
-	}
-}; Char.id = 0;
+}

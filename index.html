@@ -36,10 +36,10 @@
 			for(var i = 0; i <= 10; i++) {
 
 				char = new Char();
-				char.xVelocity = Math.floor(Math.random() *10) - 5;
-				char.yVelocity = Math.floor(Math.random() *10) - 5;
-				char.setX((w /2) + (char.element.offsetWidth /2));
-				char.setY((h /2) + (char.element.offsetHeight /2));
+				char.setXVelocity(Math.floor(Math.random() *10) - 5);
+				char.setYVelocity(Math.floor(Math.random() *10) - 5);
+				char.setX((w /2) + (char.getElement().offsetWidth /2));
+				char.setY((h /2) + (char.getElement().offsetHeight /2));
 				Engine.addDelegate(char, char.move);	
 				Engine.addDelegate(char, char.checkAlive);	
 			}
