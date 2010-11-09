@@ -1,3 +1,7 @@
+/**
+ * @author Boy van Amstel / http://www.boyvanamstel.nl
+ */
+
 var Char = function() {
 	this.id = Char.id++;
 	
