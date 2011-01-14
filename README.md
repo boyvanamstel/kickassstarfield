@@ -2,7 +2,7 @@
 
 This adds a starfield to [Erik Rothoff's Kick Ass bookmarklet](https://github.com/erkie/erkie.github.com).
 
-(http://boyvanamstel.github.com/kickassstarfield/)
+[Kick Ass Starfield](http://boyvanamstel.github.com/kickassstarfield/)
 
 ## What does it do exactly?
 
